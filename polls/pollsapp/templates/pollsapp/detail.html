@@ -1,0 +1,19 @@
+{% extends 'pollsapp/layout.html' %}
+
+
+{% block head %}
+    <title>Question #{{ question.id }}</title>
+{% endblock %}
+
+
+{% block body %}
+    <h1>{{ question.question }}</h1>
+    <ul>
+    {% for choice in question.choices.all %}
+        <li>{{ choice.choice }}</li>
+    {% endfor %}
+    </ul>
+    
+    <hr>
+    <p style="text-align: right;">{{ question.date }}</p>
+{% endblock %}
