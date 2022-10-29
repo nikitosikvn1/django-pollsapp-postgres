@@ -1,25 +1,29 @@
 {% extends 'pollsapp/layout.html' %}
+{% load static %}
 
 
 {% block head %}
+    <link rel="stylesheet" href="{% static 'pollsapp/detail.css' %}">
     <title>Question #{{ question.id }}</title>
 {% endblock %}
 
 
 {% block body %}
+<div class="container">
+    <h1 id="question-header">{{ question.question }}</h1>
     <form action="{% url 'pollsapp:vote' question.id %}" method="post">
         {% csrf_token %}
-        <fieldset>
-            <legend><h1>{{ question.question }}</h1></legend>
-            {% if error_message %}
-                <p>{{ error_message }}</p>
-            {% endif %}
+        {% if error_message %}
+            <p id="error-message">{{ error_message }}</p>
+        {% endif %}
 
-            {% for choice in question.choices.all %}
-                <input type="radio" name="choice" id="choice{{ forloop.counter }}", value="{{ choice.id }}">
-                <label for="choice{{ forloop.counter }}">{{ choice.choice }}</label><br>
-            {% endfor %}
-        </fieldset>
-        <input type="submit" value="Vote">
+        {% for choice in question.choices.all %}
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                <label class="form-check-label" for="choice{{ forloop.counter }}">{{ choice.choice }}</label>
+            </div>
+        {% endfor %}
+        <button class="btn btn-primary" type="submit">Vote</button>
     </form>
+</div>
 {% endblock %}
