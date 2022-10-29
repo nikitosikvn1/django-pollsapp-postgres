@@ -1,0 +1,18 @@
+{% extends 'pollsapp/layout.html' %}
+
+
+{% block head %}
+    <title>Result #{{ question.id }}</title>
+{% endblock %}
+
+
+{% block body %}
+    <h1>Results for question "{{ question.question }}"</h1>
+    <ul>
+    {% for choice in question.choices.all %}
+        <li>{{ choice.choice }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+    {% endfor %}
+    </ul>
+
+    <a href="{% url 'pollsapp:detail' question.id %}">Vote again?</a>
+{% endblock %}
