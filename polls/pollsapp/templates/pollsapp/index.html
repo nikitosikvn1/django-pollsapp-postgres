@@ -9,7 +9,7 @@
 
 
 {% block body %}
-    <h2 id="index-header">Recent questions</h2>
+    <h2 id="index-header">{{ header }}</h2>
 
     <ol class="list-group list-group-numbered">
     {% for question, votes in questions_votes %}
