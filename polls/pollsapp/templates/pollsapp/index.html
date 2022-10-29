@@ -1,17 +1,29 @@
 {% extends 'pollsapp/layout.html' %}
+{% load static %}
 
 
 {% block head %}
+    <link rel="stylesheet" href="{% static 'pollsapp/index.css' %}">
     <title>Main page</title>
 {% endblock %}
 
 
 {% block body %}
-    <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'pollsapp:detail' question.id %}">{{ question.question }}</a></li>
+    <h2 id="index-header">Recent questions</h2>
+
+    <ol class="list-group list-group-numbered">
+    {% for question, votes in questions_votes %}
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold"><a href="{% url 'pollsapp:detail' question.id %}" class="list-link">{{ question.question }}</a></div>
+                {{ question.date }}
+            </div>
+            <span class="badge bg-primary rounded-pill">
+                votes: {{ votes }}
+            </span>
+        </li>
     {% empty %}
         <p>No polls are available.</p>
     {% endfor %}
-    </ul>
+    </ol>
 {% endblock %}
