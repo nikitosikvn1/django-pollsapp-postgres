@@ -1,0 +1,30 @@
+#result-headline {
+    font-family: 'Roboto', sans-serif;;
+}
+
+.list-group li {
+    font-size: 20px;
+}
+
+.votes-box {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.votes-list {
+    width: 30%;
+    display: flex;
+}
+
+.votes-list ul {
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.votes-chart canvas {
+    width: 600px;
+    height: 300px;
+    border: 1px solid #bfbdbd;
+}

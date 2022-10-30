@@ -51,6 +51,13 @@ def vote(request, question_id):
 
 def result(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
+
+    data = {
+        "labels": [choice.choice for choice in question.choices.all()],
+        "values": [vote.votes for vote in question.choices.all()]
+    }
+
     return render(request, "pollsapp/result.html", {
-        "question": question
+        "question": question,
+        "data": data
     })

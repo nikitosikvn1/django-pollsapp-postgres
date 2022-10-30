@@ -1,18 +1,36 @@
 {% extends 'pollsapp/layout.html' %}
+{% load static %}
 
 
 {% block head %}
+    <link rel="stylesheet" href="{% static 'pollsapp/result.css' %}">
     <title>Result #{{ question.id }}</title>
 {% endblock %}
 
 
 {% block body %}
-    <h1>Results for question "{{ question.question }}"</h1>
-    <ul>
-    {% for choice in question.choices.all %}
-        <li>{{ choice.choice }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-    {% endfor %}
-    </ul>
+    <h1 id="result-headline">Results for question "{{ question.question }}"</h1>
+    <div class="votes-box">
+        <div class="votes-list">
+            <ul class="list-group">
+            {% for choice in question.choices.all %}
+                <li class="list-group-item">{{ choice.choice }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+            {% endfor %}
+            </ul>
+        </div>
 
-    <a href="{% url 'pollsapp:detail' question.id %}">Vote again?</a>
+        <div class="votes-chart">
+            <canvas id="result-chart"></canvas>
+        </div>
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="{% url 'pollsapp:detail' question.id %}">Vote again?</a></li>
+        </ul>
+    </nav>
+
+    {{ data|json_script:"data" }}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="{% static 'pollsapp/js/chart.js' %}"></script>
 {% endblock %}

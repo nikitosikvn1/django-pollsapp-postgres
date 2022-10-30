@@ -9,21 +9,21 @@
 
 
 {% block body %}
-<div class="container">
-    <h1 id="question-header">{{ question.question }}</h1>
-    <form action="{% url 'pollsapp:vote' question.id %}" method="post">
-        {% csrf_token %}
-        {% if error_message %}
-            <p id="error-message">{{ error_message }}</p>
-        {% endif %}
+    <div class="container">
+        <h1 id="question-header">{{ question.question }}</h1>
+        <form action="{% url 'pollsapp:vote' question.id %}" method="post">
+            {% csrf_token %}
+            {% if error_message %}
+                <p id="error-message">{{ error_message }}</p>
+            {% endif %}
 
-        {% for choice in question.choices.all %}
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-                <label class="form-check-label" for="choice{{ forloop.counter }}">{{ choice.choice }}</label>
-            </div>
-        {% endfor %}
-        <button class="btn btn-primary" type="submit">Vote</button>
-    </form>
-</div>
+            {% for choice in question.choices.all %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                    <label class="form-check-label" for="choice{{ forloop.counter }}">{{ choice.choice }}</label>
+                </div>
+            {% endfor %}
+            <button class="btn btn-primary" type="submit">Vote</button>
+        </form>
+    </div>
 {% endblock %}

@@ -15,5 +15,8 @@ class Choice(models.Model):
     choice = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
 
+    class Meta:
+        ordering = ['id']
+
     def __str__(self):
         return f"{self.choice}. Votes: {self.votes}"
