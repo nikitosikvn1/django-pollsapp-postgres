@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const values = jsonText['values'];
 
     const chart = new Chart(field, {
-        type: 'bar',
+        // 'pie', 'doughnut', 'bar', 'bubble', 'line', 'polarArea', 'radar', 'scatter'
+        type: 'pie',
         data: {
             labels: labels,
             datasets: [{

@@ -3,7 +3,7 @@
 
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'pollsapp/result.css' %}">
+    <link rel="stylesheet" href="{% static 'pollsapp/css/result.css' %}">
     <title>Result #{{ question.id }}</title>
 {% endblock %}
 
@@ -31,6 +31,5 @@
     </nav>
 
     {{ data|json_script:"data" }}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript" src="{% static 'pollsapp/js/chart.js' %}"></script>
 {% endblock %}
